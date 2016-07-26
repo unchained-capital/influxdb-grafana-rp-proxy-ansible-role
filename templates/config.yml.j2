@@ -1,0 +1,7 @@
+---
+
+# {{ansible_managed}}
+
+influxdb_url: "{{ igp_influxdb_url }}"
+
+{{ igp_rps | to_nice_yaml() }}

@@ -1,0 +1,46 @@
+---
+
+- name: Ensure repository exists locally
+  git: repo="{{ igp_repo }}" dest="{{ igp_home_dir }}" accept_hostkey=yes clone=yes update=yes
+  tags: [influxdb, grafana, igp]
+  notify:
+    - restart influxdb_grafana_rp_proxy
+
+- name: Ensure package requirements are met
+  apt: name="{{item}}" state=present
+  with_items: "{{ igp_packages}}"
+  tags: [influxdb, grafana, igp]
+
+- name: Ensure Python requirements are installed
+  command: pip install -r requirements.txt
+  args:
+    chdir: "{{ igp_home_dir }}"
+  tags: [influxdb, grafana, igp]
+
+- name: Ensure configuration directory exists
+  file: path="{{igp_conf_dir}}" state=directory owner=root group=root mode=0755
+  tags: [influxdb, grafana, igp]
+  
+- name: Ensure configuration file exists
+  template: src="templates/config.yml.j2" dest="{{ igp_conf_dir }}/config.yml" owner=root group=root mode=0755
+  notify:
+    - restart influxdb_grafana_rp_proxy
+  tags: [influxdb, grafana, igp]
+
+- name: Ensure tmp directory exists
+  file: path="{{igp_tmp_dir}}" state=directory owner="{{ igp_user }}" group="{{ igp_group }}" mode=0755
+  tags: [influxdb, grafana, igp]
+  
+- name: Ensure log directory exists
+  file: path="{{igp_log_dir}}" state=directory owner="{{igp_user}}" group="{{igp_user}}" mode=0755
+  tags: [influxdb, grafana, igp]
+  
+- name: Ensure Upstart service is defined
+  template: src="templates/upstart.conf.j2" dest="/etc/init/influxdb-grafana-rp-proxy.conf" owner=root group=root mode=0644
+  notify:
+    - restart influxdb_grafana_rp_proxy
+  tags: [influxdb, grafana, igp, upstart]
+
+- name: Ensure influxdb-grafana-rp-proxy service is running
+  service: name=influxdb-grafana-rp-proxy state=started enabled=yes
+  tags: [influxdb, grafana, igp]

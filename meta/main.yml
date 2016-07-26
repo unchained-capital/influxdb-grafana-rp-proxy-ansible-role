@@ -1,0 +1,18 @@
+---
+
+galaxy_info:
+  author: Dhruv Bansal
+  description: Deploys a daemon running the InfluxDB-Grafana Retention Policy (RP) Proxy
+  company: Unchained Capital
+  license: Apache
+  min_ansible_version: 1.2
+  platforms:
+  - name: Ubuntu
+    versions:
+    - trusty
+  galaxy_tags:
+    - dashboards
+    - databases
+    - proxies
+    - hacks
+dependencies: []

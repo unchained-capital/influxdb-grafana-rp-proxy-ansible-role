@@ -1,0 +1,19 @@
+description "influxdb-grafana-rp-proxy"
+
+exec 2>&1
+
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+respawn
+respawn limit 10 5
+
+console log
+
+setuid {{ igp_user }}
+setgid {{ igp_group }}
+
+chdir {{ igp_home_dir }}
+script
+   exec mitmdump --cadir "{{igp_tmp_dir}}" --bind-address "{{ igp_address }}" --port "{{igp_port}}" --reverse "{{ igp_influxdb_url }}" --noapp --no-http2 --script "{{ igp_home_dir }}/proxy.py {{igp_conf_dir}}/config.yml" >> "{{ igp_log_dir }}/influxdb-grafana-rp-proxy.log" 2>&1
+end script  

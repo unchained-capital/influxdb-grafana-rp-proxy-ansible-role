@@ -1,0 +1,28 @@
+---
+
+igp_packages:
+  - libssl-dev
+  - libxml2-dev
+  - libffi-dev
+  - libxslt1-dev
+  - libjpeg8-dev
+  - zlib1g-dev
+
+igp_repo: "https://github.com/unchained-capital/influxdb-grafana-rp-proxy"
+igp_home_dir: /srv/influxdb-grafana-rp-proxy
+igp_conf_dir: /etc/influxdb-grafana-rp-proxy
+igp_log_dir: /var/log/influxdb-grafana-rp-proxy
+igp_tmp_dir: "{{ igp_home_dir }}/tmp/mitmproxy"
+
+igp_user:  grafana
+igp_group: grafana
+
+igp_influxdb_url: "http://localhost:8086"
+
+igp_address: 0.0.0.0
+igp_port:    3004
+
+igp_rps:
+  rps_by_limit:
+    _default_:
+      - [0, "default"]

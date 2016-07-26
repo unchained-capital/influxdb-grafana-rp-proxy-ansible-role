@@ -1,0 +1,4 @@
+---
+
+- name: restart influxdb_grafana_rp_proxy
+  service: name=influxdb-grafana-rp-proxy state=restarted

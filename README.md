@@ -1,7 +1,7 @@
 Role Name
 =========
 
-Deploys a daemon running the InfluxDB-Grafana Retention Policy (RP) Proxy.
+Deploys a daemon running the [https://github.com/unchained-capital/influxdb-grafana-rp-proxy](InfluxDB-Grafana Retention Policy (RP) Proxy)
 
 Requirements
 ------------

@@ -2,6 +2,8 @@
 
 # {{ansible_managed}}
 
+debug: false
+
 influxdb_url: "{{ igp_influxdb_url }}"
 
 {{ igp_rps | to_nice_yaml() }}

@@ -1,6 +1,6 @@
 ---
 
-- name: Ensure repository exists locally
+- name: Ensure git repository has been cloned
   git: repo="{{ igp_repo }}" dest="{{ igp_home_dir }}" accept_hostkey=yes clone=yes update=yes
   tags: [influxdb, grafana, igp]
   notify:

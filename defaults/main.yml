@@ -14,8 +14,8 @@ igp_conf_dir: /etc/influxdb-grafana-rp-proxy
 igp_log_dir: /var/log/influxdb-grafana-rp-proxy
 igp_tmp_dir: "{{ igp_home_dir }}/tmp/mitmproxy"
 
-igp_user:  grafana
-igp_group: grafana
+igp_user:  www-data
+igp_group: www-data
 
 igp_influxdb_url: "http://localhost:8086"
 

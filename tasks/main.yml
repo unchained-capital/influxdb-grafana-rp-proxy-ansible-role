@@ -18,6 +18,7 @@
   tags: [influxdb, grafana, igp]
   register: igp_pip_install
   changed_when: "{{ 'Successfully installed' in igp_pip_install.stdout }}"
+  ignore_errors: true
 
 - name: Ensure configuration directory exists
   file: path="{{igp_conf_dir}}" state=directory owner=root group=root mode=0755
